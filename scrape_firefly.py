@@ -41,6 +41,7 @@ token = re.search(r'<meta name="csrf-token" content="([a-zA-Z0-9]+)">', r.text)
 # Update date range
 r = s.post(FIREFLY_DATECHANGE, data={'_token': token.group(1), 'label': 'Custom+range', 'start': date_from.strftime('%Y-%m-%d'), 'end': date_to.strftime('%Y-%m-%d')})
 print r.text
+
 # Obtain bills
 bills = s.get(FIREFLY_BILLS).json()
 unpaid = round(float(bills['unpaid'][1:].replace(',', '')), 2)
